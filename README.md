@@ -22,7 +22,10 @@ python3 main.py
 
 # Run flask server
 ```
+pip freeze | grep flask >> requirements.txt
 export FLASK_APP=server.py
+export FLASK_ENV=development
+
 python -m flask run
 flask run --host=0.0.0.0
 ``` 
