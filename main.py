@@ -119,6 +119,8 @@ def UPC_lookup(api_key,upc):
      
 
 if __name__ == '__main__':
+    print("Usb Barcode Database: Running..")
+    print("Please scan a item now")
     try:
         while True:
             # 1) read the barcode from usb barcode reader

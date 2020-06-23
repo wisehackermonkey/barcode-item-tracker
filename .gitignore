@@ -102,3 +102,5 @@ dist
 
 # TernJS port file
 .tern-port
+log_v1.txt
+__pycache__/bing_image_search.cpython-35.pyc

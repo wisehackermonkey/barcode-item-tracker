@@ -28,8 +28,7 @@ def bing_image_search(query):
     image_result_raw = soup.find("a",{"class":"iusc"})
 
     m = json.loads(image_result_raw["m"])
-    murl = m["murl"]# mobile image
-    turl = m["turl"]# desktop image
+    murl, turl = m["murl"],m["turl"]# mobile image, desktop image
 
     image_name = urllib.parse.urlsplit(murl).path.split("/")[-1]
     return (image_name,murl, turl)
