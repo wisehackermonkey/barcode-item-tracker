@@ -18,6 +18,9 @@ import os
 import requests
 import json
 
+
+# module to turn product name into a photo using bing image search
+from bing_image_search import bing_image_search
 # load api key from .env file
 # more info on how to use .env files
 # https://pypi.org/project/python-dotenv/ 
@@ -102,16 +105,15 @@ def UPC_lookup(api_key,upc):
 
     json_result = response.json()
     
-    print("-----" * 5)
-    print("UPC: {}".format(upc))
-    # print(json.dumps(response.json()))
     
     if json_result["success"]:
-        print("{}".format(json_result["description"]))
-        print("{}".format(json_result["images"]))
-        print("{}".format(json_result["brand"]))
+        description, images, brand = json_result["description"], json_result["images"], json_result["brand"]
+
+        return (description, images, brand)
+
     else:
-        print("UPC: not found")       
+        print("UPC: not found")  
+        return -1     
     print("-----" * 5 + "\n")
 
      
@@ -119,6 +121,22 @@ def UPC_lookup(api_key,upc):
 if __name__ == '__main__':
     try:
         while True:
-            UPC_lookup(api_key,barcode_reader('/dev/hidraw2'))
+            # 1) read the barcode from usb barcode reader
+            upc = barcode_reader('/dev/hidraw2')
+            # 2) look up barcode number for product name
+            results = UPC_lookup(api_key,upc)
+            # doent do anything if not found
+            if results == -1:
+                continue
+            description, image, brand = results
+
+            # 3) find image that matches product
+            if not image:  
+                image = bing_image_search(description) 
+            # 3) show results 
+            print("-----" * 5)
+            print("UPC: {}\n{}\n{}\n{}".format(upc,description, image, brand))
+            print("-----" * 5)
+
     except KeyboardInterrupt:
         pass
