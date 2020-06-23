@@ -8,7 +8,6 @@ import sys
 import os
 import http.cookiejar
 import json
-import html# used for url escaping 
 import urllib.request, urllib.error, urllib.parse
 import bleach
 
@@ -19,7 +18,6 @@ def get_soup(url,header):
 
 def bing_image_search(query):
     query = bleach.clean(query.lower())
-    print(query)
     query= query.split()
     query='+'.join(query)
     url="http://www.bing.com/images/search?q=" + query + "&FORM=HDRSC2"

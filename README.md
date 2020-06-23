@@ -10,7 +10,7 @@ oranbusiness@gmail.com
 
 # install
 ```
-pip install -r requirements.txt
+pip3 install -r requirements.txt
 ```
 
 # install
@@ -59,6 +59,8 @@ description string
 images string url
 success bool
 ```
+# update Got product name to image working! (20200623)
+![](./barcode_v1.gif)
 
 # TODO
 - read barcode into app
@@ -69,6 +71,7 @@ success bool
 
 - ~~use beautifuly soup to grab first image from google images
 - add results to json database
+- pass through usb barcode scanner (hidraw*) to docker container
 
 - webapp that renders json database to markdown or html
   - create web server
@@ -77,3 +80,5 @@ success bool
 # Links
 - https://upcdatabase.org/
 - https://pypi.org/project/python-dotenv/
+- https://pypi.org/project/bleach/
+- https://gist.github.com/stephenhouser/c5e2b921c3770ed47eb3b75efbc94799

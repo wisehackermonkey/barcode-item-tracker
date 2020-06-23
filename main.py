@@ -94,7 +94,6 @@ def UPC_lookup(api_key,upc):
 
 
     url = "https://api.upcdatabase.org/product/{}?apikey={}".format(upc,api_key)
-    # url = "https://api.upcdatabase.org/product/%s/?apikey=%s" % (upc, api_key)
     print(url)
 
     headers = {
