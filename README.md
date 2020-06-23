@@ -70,7 +70,7 @@ success bool
 - add barcode and product name into json database
 - test scanning products around the house
 
-- ~~use beautifuly soup to grab first image from google images
+- ~~use beautifuly soup to grab first image from google images~~
 - add results to json database
 - pass through usb barcode scanner (hidraw*) to docker container
 

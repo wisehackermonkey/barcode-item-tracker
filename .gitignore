@@ -104,3 +104,4 @@ dist
 .tern-port
 log_v1.txt
 __pycache__/bing_image_search.cpython-35.pyc
+server/db/db.json
