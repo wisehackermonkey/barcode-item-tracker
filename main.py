@@ -26,7 +26,7 @@ load_dotenv()
 
 api_key = os.getenv("API_KEY") #https://upcdatabase.org/
 
-def barcode_reader():
+def barcode_reader(usb_port):
     """Barcode code obtained from 'brechmos' 
     https://www.raspberrypi.org/forums/viewtopic.php?f=45&t=55100"""
     hid = {4: 'a', 5: 'b', 6: 'c', 7: 'd', 8: 'e', 9: 'f', 10: 'g', 11: 'h', 12: 'i', 13: 'j', 14: 'k', 15: 'l', 16: 'm',
@@ -39,7 +39,7 @@ def barcode_reader():
             29: 'Z', 30: '!', 31: '@', 32: '#', 33: '$', 34: '%', 35: '^', 36: '&', 37: '*', 38: '(', 39: ')', 44: ' ',
             45: '_', 46: '+', 47: '{', 48: '}', 49: '|', 51: ':', 52: '"', 53: '~', 54: '<', 55: '>', 56: '?'}
 
-    fp = open('/dev/hidraw2', 'rb')
+    fp = open(usb_port, 'rb')
 
     ss = ""
     shift = False
@@ -51,11 +51,11 @@ def barcode_reader():
         ## Get the character from the HID
         buffer = fp.read(8)
         for c in buffer:
-            if ord(c) > 0:
+            if c > 0:
 
                 ##  40 is carriage return which signifies
                 ##  we are done looking for characters
-                if int(ord(c)) == 40:
+                if int(c) == 40:
                     done = True
                     break;
 
@@ -64,12 +64,12 @@ def barcode_reader():
                 if shift:
 
                     ## If it is a '2' then it is the shift key
-                    if int(ord(c)) == 2:
+                    if int(c) == 2:
                         shift = True
 
                     ## if not a 2 then lookup the mapping
                     else:
-                        ss += hid2[int(ord(c))]
+                        ss += hid2[int(c)]
                         shift = False
 
                 ##  If we are not shifted then use
@@ -78,12 +78,12 @@ def barcode_reader():
                 else:
 
                     ## If it is a '2' then it is the shift key
-                    if int(ord(c)) == 2:
+                    if int(c) == 2:
                         shift = True
 
                     ## if not a 2 then lookup the mapping
                     else:
-                        ss += hid[int(ord(c))]
+                        ss += hid[int(c)]
     return ss
 
 def UPC_lookup(api_key,upc):
@@ -100,14 +100,25 @@ def UPC_lookup(api_key,upc):
 
     response = requests.request("GET", url, headers=headers)
 
+    json_result = response.json()
+    
     print("-----" * 5)
-    print(upc)
-    print(json.dumps(response.json(), indent=2))
+    print("UPC: {}".format(upc))
+    # print(json.dumps(response.json()))
+    
+    if json_result["success"]:
+        print("{}".format(json_result["description"]))
+        print("{}".format(json_result["images"]))
+        print("{}".format(json_result["brand"]))
+    else:
+        print("UPC: not found")       
     print("-----" * 5 + "\n")
+
+     
 
 if __name__ == '__main__':
     try:
         while True:
-            UPC_lookup(api_key,barcode_reader())
+            UPC_lookup(api_key,barcode_reader('/dev/hidraw2'))
     except KeyboardInterrupt:
         pass
