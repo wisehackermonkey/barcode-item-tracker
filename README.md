@@ -18,6 +18,11 @@ pip install -r requirements.txt
 ```
 python main.py
 ```
+
+# Dev log
+### MVP: its alive, and works! (20200622)
+![](./Screenshot_5.png)
+
 # TODO
 - read barcode into app
 - barcode into product name api call

@@ -8,6 +8,9 @@
 # oranbusiness@gmail.com
 # 20200622
 
+# Code addapted from this post
+# Posted on Aug 20 2017 - 4:39am by piddler
+# https://www.piddlerintheroot.com/barcode-scanner/
 
 
 import sys
