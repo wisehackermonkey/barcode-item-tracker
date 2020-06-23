@@ -67,6 +67,7 @@ success bool
 - add barcode and product name into json database
 - test scanning products around the house
 
+- use beautifuly soup to grab first image from google images
 
 # Links
 - https://upcdatabase.org/
