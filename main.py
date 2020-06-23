@@ -16,6 +16,8 @@ import requests
 import json
 
 # load api key from .env file
+# more info on how to use .env files
+# https://pypi.org/project/python-dotenv/ 
 from dotenv import load_dotenv
 load_dotenv()
 

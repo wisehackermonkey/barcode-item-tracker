@@ -24,3 +24,8 @@ python main.py
 - product name to image url api call
 - add barcode and product name into json database
 - test scanning products around the house
+
+
+# Links
+- https://upcdatabase.org/
+- https://pypi.org/project/python-dotenv/
