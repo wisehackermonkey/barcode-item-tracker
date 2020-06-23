@@ -10,17 +10,17 @@ oranbusiness@gmail.com
 
 # install
 ```
-npm install
+pip install -r requirements.txt
 ```
 
 # install
 ##### plugin barcode scanner to pc
 ```
-npm  start
+python main.py
 ```
 # TODO
 - read barcode into app
 - barcode into product name api call
 - product name to image url api call
-- add barcode and productname into json database
+- add barcode and product name into json database
 - test scanning products around the house
