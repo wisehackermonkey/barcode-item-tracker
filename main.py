@@ -1,3 +1,5 @@
+#!/usr/bin/python3
+
 # barcode-item-tracker
 # raspberry pi database that connects and tracks items entered useing a barcode scanner
 
@@ -8,12 +10,16 @@
 
 
 
-#!/usr/bin/python
 import sys
+import os
 import requests
 import json
 
-api_key = "413A1C10F05AEECDE6BA0E96799E03BC" #https://upcdatabase.org/
+# load api key from .env file
+from dotenv import load_dotenv
+load_dotenv()
+
+api_key = os.getenv("API_KEY") #https://upcdatabase.org/
 
 def barcode_reader():
     """Barcode code obtained from 'brechmos' 
