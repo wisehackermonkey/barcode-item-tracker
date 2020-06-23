@@ -63,17 +63,21 @@ flask run --host=0.0.0.0
 }
 ```
 
-# what i want back 
+## what i want back 
 ```
 description string
 images string url
 success bool
 ```
-# update Got product name to image working! (20200623)
+## update Got product name to image working! (20200623)
 ![](./barcode_v1.gif)
 
 # succesfull db test 
 ![](./Screenshot_1.png)
+
+## barcode scans pop up on web server!
+### server working, and db plumed, and barcode scans pop 
+![](./Screenshot_2.png)
 
 
 # TODO

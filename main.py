@@ -27,6 +27,13 @@ from bing_image_search import bing_image_search
 from dotenv import load_dotenv
 load_dotenv()
 
+from tinydb import TinyDB, Query
+DB_LOCATION = './server/db/db.json' 
+
+# database setup
+db = TinyDB(DB_LOCATION)
+
+
 api_key = os.getenv("API_KEY") #https://upcdatabase.org/
 
 def barcode_reader(usb_port):
@@ -140,6 +147,7 @@ if __name__ == '__main__':
             # 3) show results 
             print("-----" * 5)
             print("UPC: {}\n{}\n{}\n{}".format(upc,description, image, brand))
+            db.insert({'name': description,"image": image, "barcode": upc })
             print("-----" * 5)
 
     except KeyboardInterrupt:
