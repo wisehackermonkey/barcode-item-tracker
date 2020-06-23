@@ -20,6 +20,12 @@ pip3 install -r requirements.txt
 python3 main.py
 ```
 
+# Run flask server
+```
+export FLASK_APP=server.py
+python -m flask run
+flask run --host=0.0.0.0
+``` 
 # Dev log
 ### MVP: its alive, and works! (20200622)
 ![](./Screenshot_5.png)
@@ -62,6 +68,10 @@ success bool
 ```
 # update Got product name to image working! (20200623)
 ![](./barcode_v1.gif)
+
+# succesfull db test 
+![](./Screenshot_1.png)
+
 
 # TODO
 - read barcode into app
