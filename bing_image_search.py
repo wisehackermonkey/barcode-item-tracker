@@ -34,9 +34,7 @@ def bing_image_search(query):
         return -1
     m = json.loads(image_result_raw["m"])
     murl, turl = m["murl"],m["turl"]# mobile image, desktop image
-
-    image_name = urllib.parse.urlsplit(murl).path.split("/")[-1]
-    return (image_name,murl, turl)
+    return murl
 
 
 
