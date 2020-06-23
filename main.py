@@ -132,9 +132,12 @@ if __name__ == '__main__':
                 continue
             description, image, brand = results
 
-            # 3) find image that matches product
+            # 3) find image that matches product, if upc api doesnt find one 
             if not image:  
-                image = bing_image_search(description) 
+                image = bing_image_search(description)
+                # if bing image search didnt find any images
+                if image == -1:
+                    image = "Image Not found"
             # 3) show results 
             print("-----" * 5)
             print("UPC: {}\n{}\n{}\n{}".format(upc,description, image, brand))

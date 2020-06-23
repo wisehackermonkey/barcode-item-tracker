@@ -8,8 +8,9 @@ import sys
 import os
 import http.cookiejar
 import json
+import html# used for url escaping 
 import urllib.request, urllib.error, urllib.parse
-
+import bleach
 
 def get_soup(url,header):
     return BeautifulSoup(urllib.request.urlopen(
@@ -17,6 +18,8 @@ def get_soup(url,header):
         'html.parser')
 
 def bing_image_search(query):
+    query = bleach.clean(query.lower())
+    print(query)
     query= query.split()
     query='+'.join(query)
     url="http://www.bing.com/images/search?q=" + query + "&FORM=HDRSC2"
@@ -27,6 +30,10 @@ def bing_image_search(query):
     soup = get_soup(url,header)
     image_result_raw = soup.find("a",{"class":"iusc"})
 
+    # if search request was successfull, but no results came up
+    # then indicate no results found by -1 
+    if not image_result_raw: 
+        return -1
     m = json.loads(image_result_raw["m"])
     murl, turl = m["murl"],m["turl"]# mobile image, desktop image
 
