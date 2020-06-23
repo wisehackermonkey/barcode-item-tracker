@@ -7,6 +7,7 @@ github.com/wisehackermonkey
 oranbusiness@gmail.com
 20200622
 ```
+![](./barcode_v1.gif)
 
 # install
 ```
