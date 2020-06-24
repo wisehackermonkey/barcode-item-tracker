@@ -1,6 +1,8 @@
 # barcode-item-tracker
  raspberry pi database that connects and tracks items entered useing a barcode scanner
 
+[![Python](https://img.shields.io/badge/Python-Enabled-<COLOR>.svg)](https://shields.io/)[![Node](https://img.shields.io/badge/Node.js-Enabled-purple.svg)](https://shields.io/)[![Raspberry pi](https://img.shields.io/badge/Raspberry_pi-Enabled-blue.svg)](https://shields.io/)[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
+
 ```
 by oran collins
 github.com/wisehackermonkey
@@ -11,16 +13,36 @@ oranbusiness@gmail.com
 
 # install
 ```
+git clone https://github.com/wisehackermonkey/barcode-item-tracker.git
+cd barcode-item-tracker
 pip3 install -r requirements.txt
 ```
 
-# install
-##### plugin barcode scanner to pc
-```
+# Run
+#### plugin barcode scanner to pc
+##### Shell 1
+```bash
 python3 main.py
 ```
+##### Shell 2
+```bash
+python3 server.py
+```
 
-# Run flask server
+
+# Run
+#### plugin barcode scanner to pc
+##### Shell 1
+```bash
+nodemon --exec python3 main.py
+```
+##### Shell 2
+```bash
+nodemon --watch server/db --exec python server.py
+```
+
+# In development Notes:
+## Run flask server 
 ```
 pip freeze | grep flask >> requirements.txt
 export FLASK_APP=server.py
@@ -29,7 +51,9 @@ export FLASK_ENV=development
 python -m flask run
 flask run --host=0.0.0.0
 ``` 
-# Development watch command
+
+-----
+## Development watch command
 #### Node.js
 ```bash
 npm install -g nodemon
@@ -124,8 +148,11 @@ success bool
 - ~~webapp that renders json database to markdown or html
   - ~~create web server~~
 ##### v4
+- ~~change upc code api provide~~
+##### v5
 - fix db caching issue, on insert
-- change upc code api provider
+  - multi-thead server and barcode client
+- add css to frontend 
 
 ##### Future
 - docker image

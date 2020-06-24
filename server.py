@@ -28,15 +28,6 @@ db = TinyDB(DB_LOCATION)
 # flask webserver setup
 app = Flask(__name__)
 
-# query_text = "MORTON SALT COMPANY 26 oz Morton Salt, Iodized"
-# upc_code = "051138464646"
-# result = bing_image_search(query_text)
-
-
-# db.insert({'name': query_text,"image": result, "barcode": upc_code })
-
-
-
 
 @app.route("/")
 def main_page():
@@ -54,4 +45,4 @@ def api_all():
 # run the application
 if __name__ == "__main__":
     # add if development or production .env
-    app.run(debug=True)
+    app.run(debug=True, host="0.0.0.0")
