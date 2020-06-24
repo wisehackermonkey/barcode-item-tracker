@@ -29,9 +29,31 @@ export FLASK_ENV=development
 python -m flask run
 flask run --host=0.0.0.0
 ``` 
+# Development watch command
+#### Node.js
+```bash
+npm install -g nodemon
+nodemon --watch server/db --exec python server.py
+```
+
+##### and for barcode scanner script 'main.py'
+```bash
+nodemon --exec python3 main.py
+```
+<!-- ### or
+```
+pip install watchdog
+watchmedo shell-command \
+ --patterns="*.json" \
+ --command='python "server.py"' \
+ .
+```  -->
+
 # Dev log
 ### MVP: its alive, and works! (20200622)
 ![](./Screenshot_5.png)
+
+
 
 ### example UPC api call return
 ```
@@ -80,23 +102,44 @@ success bool
 ![](./Screenshot_2.png)
 
 
+## products showing up on website when scanned!
+#### also switched upc providers
+![](./Screenshot_7.jpg)
+
+
+
 # TODO
-- read barcode into app
-- barcode into product name api call
-- product name to image url api call
-- add barcode and product name into json database
-- test scanning products around the house
-
+##### v1
+- ~~read barcode into app~~
+##### v2
+- ~~barcode into product name api call~~
+- ~~product name to image url api call~~
 - ~~use beautifuly soup to grab first image from google images~~
-- add results to json database
-- pass through usb barcode scanner (hidraw*) to docker container
+- ~~test scanning products around the house~~
+##### v3
+- ~~add barcode and product name into json database~~
 
-- webapp that renders json database to markdown or html
-  - create web server
-  - docker image
+- ~~add results to json database~~
+
+- ~~webapp that renders json database to markdown or html
+  - ~~create web server~~
+##### v4
+- fix db caching issue, on insert
+- change upc code api provider
+
+##### Future
+- docker image
+  - pass through usb barcode scanner (hidraw*) to docker container
 
 # Links
 - https://upcdatabase.org/
 - https://pypi.org/project/python-dotenv/
 - https://pypi.org/project/bleach/
 - https://gist.github.com/stephenhouser/c5e2b921c3770ed47eb3b75efbc94799
+- [template generator flask tutorial iternation](https://nicolas.perriault.net/code/2012/dead-easy-yet-powerful-static-website-generator-with-flask/)
+- [nodemon or watchdog project reloader](https://stackoverflow.com/questions/49355010/how-do-i-watch-python-source-code-files-and-restart-when-i-save)
+- [watchdog · PyPI](https://pypi.org/project/watchdog/)
+- [Quickstart Flask Documentation (1.1.x)](https://flask.palletsprojects.com/en/1.1.x/quickstart/)
+- [tinydb PyPI](https://pypi.org/project/tinydb/)
+- [Advanced Usage TinyDB 4.1.1 documentation](https://tinydb.readthedocs.io/en/stable/usage.html#handling-data)
+- [barcodelookup.com api](https://www.barcodelookup.com/api)

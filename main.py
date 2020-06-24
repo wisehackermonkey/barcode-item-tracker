@@ -99,7 +99,12 @@ def barcode_reader(usb_port):
 def UPC_lookup(api_key,upc):
     '''V3 API'''
 
+    if os.getenv("UPC_PROVIDER") == "barcodelookup":#select which website to use for upc lookup barcodelookup.com
+        return barcodelookup(api_key, upc)
+    elif os.getenv("UPC_PROVIDER") == "upcdatabase":# or upcdatabase.com
+        return upcdatabase(api_key, upc)
 
+def upcdatabase(api_key,upc):
     url = "https://api.upcdatabase.org/product/{}?apikey={}".format(upc,api_key)
     print(url)
 
@@ -111,16 +116,34 @@ def UPC_lookup(api_key,upc):
 
     json_result = response.json()
     
-    
+
     if json_result["success"]:
         description, images, brand = json_result["description"], json_result["images"], json_result["brand"]
-
         return (description, images, brand)
-
     else:
+        print(json_result["error"])
         print("UPC: not found")  
         return -1     
     print("-----" * 5 + "\n")
+def barcodelookup(api_key, upc):
+    url = f"https://api.barcodelookup.com/v2/products?barcode={upc}&formatted=y&key={api_key}"
+    response = requests.request("GET", url)
+    json_result = response.json()
+    # if barcodelookup.com found a match for the upc code
+    if json_result:
+        product = json_result["products"][0]
+        
+        print( product)
+        description, image = product["product_name"], product["images"][0]
+        print(description)
+        print(image)
+        return (description, image, "None")
+    else:
+        print(json_result["error"])
+        print("UPC: not found") 
+        return -1
+
+    
 
      
 
@@ -130,7 +153,7 @@ if __name__ == '__main__':
     try:
         while True:
             # 1) read the barcode from usb barcode reader
-            upc = barcode_reader('/dev/hidraw2')
+            upc = barcode_reader('/dev/hidraw1')
             # 2) look up barcode number for product name
             results = UPC_lookup(api_key,upc)
             # doent do anything if not found
