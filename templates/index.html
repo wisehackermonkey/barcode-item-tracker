@@ -1,0 +1,24 @@
+<!-- templates/index.html -->
+<html>
+
+<head>
+    <title>Barcode Product List</title>
+</head>
+
+<body>
+    <h1>Barcode Product List</h1>
+
+    <h1></h1>
+    <ul>
+        {% for product in products %}
+        <li>
+            <h4>{{ product.name }}</h4>
+            <img src="{{ product.image }}" alt="" srcset="">
+        </li>
+        {% else %}
+        <li>No stuff.</li>
+        {% endfor %}
+    </ul>
+</body>
+
+</html>
